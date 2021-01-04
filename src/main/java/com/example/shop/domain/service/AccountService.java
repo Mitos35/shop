@@ -1,15 +1,10 @@
 package com.example.shop.domain.service;
 
 import com.example.shop.database.entity.Account;
-import com.example.shop.database.entity.Product;
 import com.example.shop.database.repository.AccountRepository;
 import com.example.shop.domain.model.User;
 import com.example.shop.mapper.AccountMapper;
-import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class AccountService {
@@ -27,6 +22,14 @@ public class AccountService {
         String email = account.getEmail();
         if (accountRepository.existsByEmail(email)) throw new IllegalStateException("ОШИБКА!");
 
+        accountRepository.save(account);
+        return account.getId();
+    }
+
+    public Long addMoney(Long id, User user) {
+        if (!accountRepository.existsById(id)) throw new IllegalStateException ("ОШИБКА!");
+        Account account = accountMapper.toAccount(user);
+        account.setId(id);
         accountRepository.save(account);
         return account.getId();
     }

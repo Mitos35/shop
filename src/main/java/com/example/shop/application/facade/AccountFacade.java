@@ -25,4 +25,7 @@ public class AccountFacade {
     }
 
 
+    public Long addMoney(Long id, AccountDto accountDto) {
+        return accountService.addMoney(id, accountMapper.toModel(accountDto));
+    }
 }
