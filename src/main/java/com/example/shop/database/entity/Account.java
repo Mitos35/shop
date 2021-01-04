@@ -20,7 +20,7 @@ public class Account {
     private String email;
     private BigDecimal balance;
 
-    @ManyToMany(mappedBy = "accounts")
+    @ManyToMany
     private List<Product> products;
 
 }
