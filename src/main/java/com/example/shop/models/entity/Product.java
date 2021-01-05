@@ -1,10 +1,10 @@
-package com.example.shop.database.entity;
+package com.example.shop.models.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
@@ -17,12 +17,9 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany
-    private List<Account> accounts;
-
     @Column(name ="name_product")
     private String nameProduct;
-    private Double price;
+    private BigDecimal price;
     private String category;
 
     @ManyToOne

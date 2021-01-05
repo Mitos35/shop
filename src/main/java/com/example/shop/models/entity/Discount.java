@@ -1,4 +1,4 @@
-package com.example.shop.database.entity;
+package com.example.shop.models.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

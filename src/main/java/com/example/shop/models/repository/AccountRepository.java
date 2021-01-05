@@ -1,7 +1,7 @@
-package com.example.shop.database.repository;
+package com.example.shop.models.repository;
 
 
-import com.example.shop.database.entity.Account;
+import com.example.shop.models.entity.Account;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface AccountRepository extends PagingAndSortingRepository<Account, Long>  {

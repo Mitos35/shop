@@ -1,8 +1,7 @@
 package com.example.shop.mapper;
 
 import com.example.shop.application.dto.AccountDto;
-import com.example.shop.database.entity.Account;
-import com.example.shop.domain.model.User;
+import com.example.shop.models.entity.Account;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
@@ -17,11 +16,7 @@ public class AccountMapper {
         this.mapper = mapper;
     }
 
-    public User toModel(AccountDto accountDto) {
-        return Objects.isNull(accountDto) ? null : mapper.map(accountDto, User.class);
-    }
-
-    public Account toAccount(User user) {
-        return Objects.isNull(user) ? null :mapper.map(user, Account.class);
+    public Account toModel(AccountDto accountDto) {
+        return Objects.isNull(accountDto) ? null : mapper.map(accountDto, Account.class);
     }
 }
