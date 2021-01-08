@@ -1,8 +1,8 @@
 package com.example.shop.application.controller;
 
+import com.example.shop.application.dto.CheckoutDto;
 import com.example.shop.application.dto.ProductDto;
 import com.example.shop.application.facade.ProductFacade;
-import com.example.shop.models.repository.AccountRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,11 +13,9 @@ import java.util.List;
 public class ProductController {
 
     private final ProductFacade productFacade;
-    private final AccountRepository accountRepository;
 
-    public ProductController(ProductFacade productFacade, AccountRepository accountRepository) {
+    public ProductController(ProductFacade productFacade) {
         this.productFacade = productFacade;
-        this.accountRepository = accountRepository;
     }
 
     @GetMapping
@@ -26,6 +24,9 @@ public class ProductController {
         return productFacade.getAllProducts();
     }
 
-
-
+    @PostMapping
+    @ResponseStatus(HttpStatus.OK)
+    public String pay(CheckoutDto checkoutDto) {
+        return productFacade.pay(checkoutDto);
+    }
 }

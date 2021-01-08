@@ -1,5 +1,6 @@
 package com.example.shop.application.facade.impl;
 
+import com.example.shop.application.dto.CheckoutDto;
 import com.example.shop.application.dto.ProductDto;
 import com.example.shop.application.facade.ProductFacade;
 import com.example.shop.mapper.ProductMapper;
@@ -27,4 +28,8 @@ public class ProductFacadeImpl implements ProductFacade {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public String pay(CheckoutDto checkoutDto) {
+        return productService.pay(checkoutDto);
+    }
 }

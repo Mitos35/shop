@@ -2,10 +2,10 @@ package com.example.shop.service.impl;
 
 import com.example.shop.application.dto.CheckoutDto;
 import com.example.shop.models.entity.Account;
-import com.example.shop.models.repository.AccountRepository;
-import com.example.shop.service.ProductService;
 import com.example.shop.models.entity.Product;
+import com.example.shop.models.repository.AccountRepository;
 import com.example.shop.models.repository.ProductRepository;
+import com.example.shop.service.ProductService;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -32,20 +32,26 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public String pay(CheckoutDto checkoutDto) {
+        String answer = "";
+
         BigDecimal totalPrice = new BigDecimal(0);
-        for (int i = 0; i < checkoutDto.getProducts().size(); i++) {
+        for (int i = 0; i < checkoutDto.getProductsId().size(); i++) {
             totalPrice = totalPrice.add(
-                    productRepository.findById(checkoutDto.getProducts().get(i).getId())
-                            .get().getPrice()
-            );
+                    accountRepository.findById(checkoutDto.getProductsId().get(i))
+                            .get().getBalance());
         }
 
-//        BigDecimal userBalance = new BigDecimal(String.valueOf(accountRepository.findById(account.getId())));
-//
-//        if (userBalance.compareTo(userBalance) >= 0){
-//
-//        }
+        BigDecimal userBalance = accountRepository.findById(checkoutDto.getAccountId()).get().getBalance();
 
-        return null;
+        if (userBalance.compareTo(totalPrice) >= 0) {
+            userBalance = userBalance.subtract(totalPrice);
+            Account currentUse = accountRepository.findById(checkoutDto.getAccountId()).get();
+            currentUse.setBalance(userBalance);
+            accountRepository.save(currentUse);
+            answer = "Operation completed successfully, your balance " + userBalance;
+        } else {
+            answer = "There are not enough funds on our balance";
+        }
+        return answer;
     }
 }
