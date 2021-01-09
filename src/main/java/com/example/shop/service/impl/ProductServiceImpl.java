@@ -34,11 +34,11 @@ public class ProductServiceImpl implements ProductService {
     public String pay(CheckoutDto checkoutDto) {
         String answer = "";
 
-        BigDecimal totalPrice = new BigDecimal(0);
+        BigDecimal totalPrice = new BigDecimal("0.0");
         for (int i = 0; i < checkoutDto.getProductsId().size(); i++) {
-            totalPrice = totalPrice.add(
-                    accountRepository.findById(checkoutDto.getProductsId().get(i))
-                            .get().getBalance());
+            totalPrice = totalPrice.add(productRepository.findById(checkoutDto.getProductsId().get(i))
+                    .get().getPrice()
+            );
         }
 
         BigDecimal userBalance = accountRepository.findById(checkoutDto.getAccountId()).get().getBalance();

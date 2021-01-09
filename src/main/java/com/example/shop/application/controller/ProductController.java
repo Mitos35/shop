@@ -26,7 +26,7 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public String pay(CheckoutDto checkoutDto) {
+    public String pay(@RequestBody CheckoutDto checkoutDto) {
         return productFacade.pay(checkoutDto);
     }
 }
